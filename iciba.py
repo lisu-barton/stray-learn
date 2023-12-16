@@ -27,6 +27,7 @@ class IcibaHtml(object):
                         continue
                     data.append(line.split('|'))
         else:
+            print("download page: " + path)
             data = self.course(url)
             if not len(data):
                 return data
@@ -41,14 +42,13 @@ class IcibaHtml(object):
         return data
     
     def loadClass(self, id):
-        path = "static\\{}\\".format(id)
+        path = "static/{}/".format(id)
         if not os.path.exists(path):
             os.mkdir(path)
 
         p = 1
         data = []
         while True:
-            print("download page: " + str(p))
             url = "https://word.iciba.com/?action=words&class={}&course={}".format(id, p) 
             resp = self.load(url, path)
             if not len(resp):

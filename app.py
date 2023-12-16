@@ -42,13 +42,18 @@ class App(object):
     def play(self, audio: str):
         try:
             audio = audio.replace("\n", "")
-            import requests
-            sound_bytes = requests.get(url=audio).content
-            name = 'x.mp3'
-            with open(name, 'wb') as f:
-                f.write(sound_bytes)
-            playsound(name)
-            os.remove(name)
+            from platform import system
+            system = system()
+            if system == 'Windows' or system == 'Darwin':
+                import requests
+                sound_bytes = requests.get(url=audio).content
+                name = 'x.mp3'
+                with open(name, 'wb') as f:
+                    f.write(sound_bytes)
+                playsound(name)
+                os.remove(name)
+            else:
+                playsound(audio)
         except Exception as e:
             print('error play sound')
             pass

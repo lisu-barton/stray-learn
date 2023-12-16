@@ -1,3 +1,4 @@
+requests
 pystray
 lxml
 playsound==1.2.2
